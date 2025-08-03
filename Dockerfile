@@ -10,10 +10,10 @@ RUN apt-get update && apt-get install -y \
 # Actualizar pip y copiar requirements
 RUN pip install --upgrade pip
 
-# Copiar e instalar dependencias Python en pasos separados para optimizar memoria
+# Copiar e instalar dependencias Python
 COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
 RUN pip install --no-cache-dir gunicorn
-RUN pip install --no-cache-dir -r requirements.txt --no-deps --force-reinstall
 
 # Copiar código de la aplicación
 COPY . .
