@@ -7,9 +7,13 @@ RUN apt-get update && apt-get install -y \
     build-essential \
     && rm -rf /var/lib/apt/lists/*
 
-# Copiar e instalar dependencias Python
+# Actualizar pip y copiar requirements
+RUN pip install --upgrade pip
+
+# Copiar e instalar dependencias Python en pasos separados para optimizar memoria
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt gunicorn
+RUN pip install --no-cache-dir gunicorn
+RUN pip install --no-cache-dir -r requirements.txt --no-deps --force-reinstall
 
 # Copiar código de la aplicación
 COPY . .
