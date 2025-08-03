@@ -684,9 +684,3 @@ def parse_rag_output_to_questions(rag_output: str, cantidad: int) -> List[Pregun
                 alternativa_correcta=1
             ) for i in range(cantidad)
         ]
-
-if __name__ == "__main__":
-    import uvicorn
-    import os
-    port = int(os.environ.get("PORT", 8000))
-    uvicorn.run(app, host="0.0.0.0", port=port)
